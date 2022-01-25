@@ -1,6 +1,8 @@
 'use strict';
 let min = 0;
 let max = 0;
+let salary;
+let tax= (7.5/100);
 function EmployeesInfo(employeeId, fullName, department, level
     , salary) {
 
@@ -16,11 +18,11 @@ EmployeesInfo.prototype.salaries = function () {
 
 
     this.salary=randomSalary(this.level)
-    this.salary = Math.floor((salary) * tax);
+   
 
+    this.salary = Math.floor((this.salary) * tax);
 
-
-    return (salary - tax);
+    return  this.salary
 
 }
 function randomSalary(level) {
