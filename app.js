@@ -68,12 +68,12 @@ const employee7 = new EmployeesInfo(1006, 'Hadi Ahmad', 'Finance', 'Mid-Senior',
 employee7.render()
 
 console.table(employee1)
-console.log("the net salary for " + employee1.fullName + " is = " + employee1.salaries())
-console.log("the net salary for " + employee2.fullName + " is = " + employee2.salaries())
-console.log("the net salary for " + employee3.fullName + " is = " + employee3.salaries())
-console.log("the net salary for " + employee4.fullName + " is = " + employee4.salaries())
-console.log("the net salary for " + employee5.fullName + " is = " + employee5.salaries())
-console.log("the net salary for " + employee6.fullName + " is = " + employee6.salaries())
-console.log("the net salary for " + employee7.fullName + " is = " + employee7.salaries())
+console.log("the net tax salary for " + employee1.fullName + " is = " + employee1.salaries())
+console.log("the net tax salary for " + employee2.fullName + " is = " + employee2.salaries())
+console.log("the net tax salary for " + employee3.fullName + " is = " + employee3.salaries())
+console.log("the net tax salary for " + employee4.fullName + " is = " + employee4.salaries())
+console.log("the net tax salary for " + employee5.fullName + " is = " + employee5.salaries())
+console.log("the net tax salary for " + employee6.fullName + " is = " + employee6.salaries())
+console.log("the net tax salary for " + employee7.fullName + " is = " + employee7.salaries())
 
 
