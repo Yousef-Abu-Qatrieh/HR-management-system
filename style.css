@@ -14,9 +14,9 @@
     display: block;
     color: #f2f2f2;
     text-align: center;
-    padding: 14px 16px;
+    padding: 5px 8px;
     text-decoration: none;
-    font-size: 17px;
+    font-size: 10px;
   }
   
   .navbar a:hover {
@@ -26,7 +26,8 @@
   
 
   .footer {
-    position: fixed;
+    position: sticky;
+
     left: 0;
     bottom: 0;
     width: 100%;
