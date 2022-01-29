@@ -1,5 +1,9 @@
 
-  body {margin:0;}
+  body {margin:0;
+
+    min-height: calc(100vh - 50px);
+  position: relative;
+padding-bottom: 50px;}
 
   .navbar {
     overflow: hidden;
@@ -24,9 +28,13 @@
     color: black;
   }
   
+  table, th, td {
+    border: 1px solid black;
+  }
+
 
   .footer {
-    position: sticky;
+    position: absolute;
 
     left: 0;
     bottom: 0;
@@ -35,3 +43,19 @@
     color: white;
     text-align: center;
  }
+ .footer2 {
+  position: fixed;
+
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #333;
+  color: white;
+  text-align: center;
+}
+.emp-image{
+
+
+  width: 100px;
+  height: 100px;
+}
