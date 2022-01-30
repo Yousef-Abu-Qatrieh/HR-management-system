@@ -5,20 +5,25 @@ let min = 0;
 let max = 0;
 let salary;
 let tax = (7.5 / 100);
+let allEmpInformation = [];
+
+checkLocalAndPush()
+
 function EmployeesInfo(employeeId, fullName, department, level
-    , salary) {
+    , salary, imageUrl) {
 
     this.employeeId = employeeId;
     this.fullName = fullName;
     this.department = department;
     this.level = level;
-    this.imageUrl = `./image/employee-cartoon.png`;
+    this.imageUrl = imageUrl || `./image/employee-cartoon.png`;
     this.salary = salary;
 
 }
-EmployeesInfo.prototype.randomID = function () {
-    this.employeeId = getRandomId(1000, 1999);
-}
+
+// EmployeesInfo.prototype.randomID = function () {
+//     this.employeeId = getRandomId(1000, 1999);
+// }
 
 EmployeesInfo.prototype.salaries = function () {
 
@@ -51,33 +56,36 @@ function randomSalary(level) {
 
 
 
-EmployeesInfo.prototype.render = function () {
-   
+function render  (empLs) {
+    empData.innerHTML='';
+    for(let i=0;i<empLs.length;i++){
+
     let div = document.createElement('div');
     empData.appendChild(div);
     let img = document.createElement('img');
-    img.setAttribute('src',this.imageUrl);
+    img.setAttribute('src', empLs[i].imageUrl);
+    img.setAttribute('class', 'emp-image');
     div.appendChild(img);
     let h3 = document.createElement('h3');
-  h3.textContent =`Name : ${this.fullName} -ID : ${this.employeeId} ` ;
-     div.appendChild(h3);
-     let p = document.createElement('p');
+    h3.textContent = `Name : ${empLs[i].fullName} -ID : ${empLs[i].employeeId} `;
+    div.appendChild(h3);
+    let p = document.createElement('p');
     div.appendChild(p);
-    p.textContent=`Department : ${this.department} -Level : ${this.level} `;
-
-    
-    
-   
-    
+    p.textContent = `Department : ${empLs[i].department} -Level : ${empLs[i].level} -Salary :${empLs[i].salary}`;
 
 
+
+    }
+
+
+}
     // document.write(` <p> ${this.fullName}     &nbsp &nbsp    ${randomSalary(this.level)} </p>  <br>`)
 
 
 
-}
-const employee1 = new EmployeesInfo(1000, 'Ghazi Samer', 'Administration', 'Senior', randomSalary(this.level));
-employee1.render();
+
+// const employee1 = new EmployeesInfo(1000, 'Ghazi Samer', 'Administration', 'Senior', randomSalary(this.level),`./image/employee-cartoon.png`);
+// employee1.render();
 // const employee2 = new EmployeesInfo(1001, 'Lana Ali', 'Finance', 'Senior', randomSalary(this.level));
 // employee2.render();
 // const employee3 = new EmployeesInfo(1002, 'Tamara Ayoub', 'Marketing', 'Senior', randomSalary(this.level));
@@ -105,15 +113,63 @@ function employeeSubmit(event) {
     let fullName = event.target.fullName.value;
     let department = event.target.department.value;
     let level = event.target.level.value;
-    let imageUrl= event.target.imageUrl.value;
+    let imageUrl = event.target.imageUrl.value;
+    let employeeId = getRandomId(1000, 1999);
+    let salary = randomSalary(level)
     // console.log(`${fullName}  ${department}  ${level} ${imageUrl}  `);
-    let newEmp = new EmployeesInfo( imageUrl, fullName,department,level);
-    newEmp.randomID();
-    newEmp.render();
+    let newEmp = new EmployeesInfo(employeeId, fullName, department, level, salary, imageUrl);
+   
+    allEmpInformation.push(newEmp);
+    
+    let jsonArray = toJSON();
+
+    saveToLocalS(jsonArray);
+    
+    render(readFromLocalS());
 }
 
 function getRandomId(min, max) {
     return Math.floor(Math.random() * (max - min) + min);
 }
+
+
+
+
+
+function checkLocalAndPush() {
+    if (allEmpInformation.length == 0) {
+        let arr = readFromLocalS();
+        if (arr.length != 0) {
+            allEmpInformation = arr;
+        }
+    }
+}
+
+function readFromLocalS() {
+    let jsonArr = localStorage.getItem('employeedata');
+    let arr = JSON.parse(jsonArr);
+    if (arr !== null) {
+        return arr;
+    } else {
+        return [];
+    }
+}
+function toJSON (){
+    let jsonArray = JSON.stringify(allEmpInformation);
+    // console.log(jsonArray);
+    return jsonArray;
+}
+
+function saveToLocalS(jsonArray){
+    // setItem('key',value(the convertd array))
+
+        localStorage.setItem('employeedata',jsonArray)
+    
+        // [0:{name: 'latte', age: '10'}    1: {name: 'ahmad', age: '23'}]
+     
+}
+render(readFromLocalS())
+
+
 
 empForm.addEventListener('submit', employeeSubmit);
